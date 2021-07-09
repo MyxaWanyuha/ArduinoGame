@@ -24,16 +24,16 @@ enum class PinButton : uint8_t
 class GamePrototype
 {
 public:
-	void UpdateGame()
-	{
+  void UpdateGame()
+  {
     PlaySound();
 
     uint64_t time = millis();
 
     if( Mode == GameMode::End )
     {
-        ResetNext = time + ResetTimeout;
-        Mode = GameMode::Reset;
+      ResetNext = time + ResetTimeout;
+      Mode = GameMode::Reset;
     }
 
     if( Mode == GameMode::Reset && time > ResetNext )
@@ -46,32 +46,32 @@ public:
     }
 
     //UpdateControls
-    if(( Mode == GameMode::Ready || Mode == GameMode::Game ) && time > ControlNext )
+    if( ( Mode == GameMode::Ready || Mode == GameMode::Game ) && time > ControlNext )
     {
       ControlNext = time + ControlTimeout;
 
-      ButtonUp = digitalRead(static_cast<uint8_t>(PinButton::Up));
-      ButtonDown = digitalRead(static_cast<uint8_t>(PinButton::Down));
-      ButtonLeft = digitalRead(static_cast<uint8_t>(PinButton::Left));
-      ButtonRight = digitalRead(static_cast<uint8_t>(PinButton::Right));
-      ButtonRightUp = digitalRead(static_cast<uint8_t>(PinButton::RightUp));
-      ButtonLeftUp = digitalRead(static_cast<uint8_t>(PinButton::LeftUp));
+      ButtonUp = digitalRead( static_cast<uint8_t>( PinButton::Up ) );
+      ButtonDown = digitalRead( static_cast<uint8_t>( PinButton::Down ) );
+      ButtonLeft = digitalRead( static_cast<uint8_t>( PinButton::Left ) );
+      ButtonRight = digitalRead( static_cast<uint8_t>( PinButton::Right ) );
+      ButtonRightUp = digitalRead( static_cast<uint8_t>( PinButton::RightUp ) );
+      ButtonLeftUp = digitalRead( static_cast<uint8_t>( PinButton::LeftUp ) );
 
       if( Mode == GameMode::Ready && ( ButtonUp || ButtonDown || ButtonLeft || ButtonRight || ButtonRightUp || ButtonLeftUp ) )
         Mode = GameMode::Game;
     }
     else
     {
-        ButtonUp = false;
-        ButtonDown = false;
-        ButtonLeft = false;
-        ButtonRight = false;
-        ButtonRightUp = false;
-        ButtonLeftUp = false;
+      ButtonUp = false;
+      ButtonDown = false;
+      ButtonLeft = false;
+      ButtonRight = false;
+      ButtonRightUp = false;
+      ButtonLeftUp = false;
     }
 
     if( Mode == GameMode::Game && time > UpdateNext )
-        UpdateNext = time + UpdateTimeout;
+      UpdateNext = time + UpdateTimeout;
 
     //Update game state
     Update();
@@ -84,13 +84,13 @@ protected:
   virtual void PlaySound()
   {
     if( Mode == GameMode::Ready )
-      soundManager.PlayMelody(MelodyID::Intro, true);
+      soundManager.PlayMelody( MelodyID::Intro, true );
     else if( Mode == GameMode::Reset )
-      soundManager.PlayMelody(MelodyID::GameOver, false);
+      soundManager.PlayMelody( MelodyID::GameOver, false );
     else if( Mode == GameMode::Game )
-      soundManager.PlayMelody(MelodyID::GameStart, false);
+      soundManager.PlayMelody( MelodyID::GameStart, false );
   }
-  
+
   void GraphicsRender()
   {
     Graphics.firstPage();
