@@ -4,7 +4,7 @@ void SoundManager::PlayMelody( MelodyID id, bool cycle )
 {
   if ( id == MelodyID::None ) return;
 
-  uint64_t t = millis();
+  uint64_t time = millis();
 
   if ( melodyPlaying != id )
   {
@@ -13,7 +13,7 @@ void SoundManager::PlayMelody( MelodyID id, bool cycle )
     playNext = 0;
   }
 
-  if ( ( melodyPlaying != MelodyID::None ) && ( t > playNext ) )
+  if ( ( melodyPlaying != MelodyID::None ) && ( time > playNext ) )
   {
     const uint16_t* melody = GetMelody( id );
     if ( melody[melodyNote] != melodyEnd )
@@ -23,7 +23,7 @@ void SoundManager::PlayMelody( MelodyID id, bool cycle )
       else
         noTone( pinSpeaker );
 
-      playNext = t + melody[melodyNote + 1] * 1.11;
+      playNext = time + melody[melodyNote + 1] * 1.11;
       melodyNote += 2;
     }
     else if ( cycle )
@@ -31,7 +31,14 @@ void SoundManager::PlayMelody( MelodyID id, bool cycle )
       melodyNote = 0;
       playNext = 0;
     }
+    else
+      melodyPlaying = MelodyID::None;
   }
+}
+
+void SoundManager::Beep()
+{
+  tone( pinSpeaker, 147, BeepTimeout );
 }
 
 const uint16_t* SoundManager::GetMelody( MelodyID id )

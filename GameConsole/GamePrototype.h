@@ -2,6 +2,7 @@
 #define GAME_PROTOTYPE_H
 
 #include "Sound.h"
+#include "Graphics.h"
 
 enum class GameMode : uint8_t
 {
@@ -37,8 +38,10 @@ public:
     }
 
     if( Mode == GameMode::Reset && time > ResetNext )
+    {
+      Mode = GameMode::Ready;
       ResetGame();
-
+    }
     if( Mode == GameMode::Ready && time > IntroNext )
     {
       IntroNext = time + IntroTimeout;
@@ -71,21 +74,39 @@ public:
     }
 
     if( Mode == GameMode::Game && time > UpdateNext )
+    {
       UpdateNext = time + UpdateTimeout;
-
-    //Update game state
-    Update();
-
+      //Update game state
+      Update();
+    }
     //Draw game
     GraphicsRender();
   }
 
 protected:
+  GameMode Mode = GameMode::Ready;
+
+  virtual void Render() = 0;
+  virtual void Update() = 0;
+  virtual void ResetGame() = 0;
+  
+  bool ButtonUp = false;
+  bool ButtonDown = false;
+  bool ButtonLeft = false;
+  bool ButtonRight = false;
+  bool ButtonRightUp = false;
+  bool ButtonLeftUp = false;
+  
+  SoundManager soundManager;
+  
+  bool intro_state = true;
+  
+private:
   virtual void PlaySound()
   {
     if( Mode == GameMode::Ready )
       soundManager.PlayMelody( MelodyID::Intro, true );
-    else if( Mode == GameMode::Reset )
+    else if( Mode == GameMode::End )
       soundManager.PlayMelody( MelodyID::GameOver, false );
     else if( Mode == GameMode::Game )
       soundManager.PlayMelody( MelodyID::GameStart, false );
@@ -100,16 +121,6 @@ protected:
     } 
     while( Graphics.nextPage() );
   }
-  
-  virtual void Render() = 0;
-  virtual void Update() = 0;
-  virtual void ResetGame() = 0;
-  bool ButtonUp = false;
-  bool ButtonDown = false;
-  bool ButtonLeft = false;
-  bool ButtonRight = false;
-  bool ButtonRightUp = false;
-  bool ButtonLeftUp = false;
 
   uint64_t ControlNext = 0;
   uint64_t UpdateNext = 0;
@@ -117,18 +128,11 @@ protected:
   uint64_t PlayNext = 0;
   uint64_t IntroNext = 0;
 
-  const uint16_t UpdateTimeout = 200;
-  
-  GameMode Mode = GameMode::Ready;
-
-  const uint16_t ResetTimeout = 5000;
+  const uint16_t UpdateTimeout = 16;
+  const uint16_t ResetTimeout = 2000;
   const uint8_t ControlTimeout = 100;
   const uint8_t BeepTimeout = 100;
   const uint16_t IntroTimeout = 500;
-
-  bool intro_state = true;
-
-  SoundManager soundManager;
 };
 
 #endif // GAME_PROTOTYPE_H

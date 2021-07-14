@@ -51,6 +51,7 @@ Point Game::FindPlayer() const
 
 void Game::Swap( int8_t& p1, int8_t& p2 )
 {
+  ++stepCount;
   p1 = p1 ^ p2;
   p2 = p1 ^ p2;
   p1 = p1 ^ p2;

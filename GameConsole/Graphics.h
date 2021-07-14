@@ -10,9 +10,18 @@
 #include <Wire.h>
 #endif
 
-uint8_t ScreenWidth = 128;
-uint8_t ScreenHeight = 64;
+static uint8_t ScreenWidth = 128;
+static uint8_t ScreenHeight = 64;
 
-U8G2_SH1106_128X64_NONAME_1_HW_I2C Graphics( U8G2_R0, /* reset=*/ U8X8_PIN_NONE );
+static U8G2_SH1106_128X64_NONAME_1_HW_I2C Graphics( U8G2_R0, /* reset=*/ U8X8_PIN_NONE );
+
+struct TextHeightWidth
+{
+  TextHeightWidth(const char* str)
+  : height( Graphics.getMaxCharHeight() ),
+    width( Graphics.getStrWidth( str ) ) {}
+
+  uint32_t height, width;
+};
 
 #endif // GRAPHICS_H

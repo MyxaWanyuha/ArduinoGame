@@ -19,7 +19,7 @@ class SoundManager
 {
 public:
   void PlayMelody( MelodyID id, bool cycle );
-
+  void Beep();
 private:
   const uint16_t* GetMelody( MelodyID id );
 
@@ -28,6 +28,7 @@ private:
   uint64_t playNext = 0;
 
   const uint8_t pinSpeaker = 8;
+  const uint8_t BeepTimeout = 10000;
 };
 
 #endif // SOUND_H
