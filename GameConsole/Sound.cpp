@@ -31,8 +31,6 @@ void SoundManager::PlayMelody( MelodyID id, bool cycle )
       melodyNote = 0;
       playNext = 0;
     }
-    else
-      melodyPlaying = MelodyID::None;
   }
 }
 

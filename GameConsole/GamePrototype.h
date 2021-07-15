@@ -107,9 +107,9 @@ private:
     if( Mode == GameMode::Ready )
       soundManager.PlayMelody( MelodyID::Intro, true );
     else if( Mode == GameMode::End )
-      soundManager.PlayMelody( MelodyID::GameOver, false );
+      soundManager.PlayMelody( MelodyID::GameOver );
     else if( Mode == GameMode::Game )
-      soundManager.PlayMelody( MelodyID::GameStart, false );
+      soundManager.PlayMelody( MelodyID::GameStart );
   }
 
   void GraphicsRender()

@@ -18,7 +18,7 @@ const uint16_t melodyGameOver[] = { 369, 75, 349, 75, 311, 75, 277, 75, 261, 75,
 class SoundManager
 {
 public:
-  void PlayMelody( MelodyID id, bool cycle );
+  void PlayMelody( MelodyID id, bool cycle = false );
   void Beep();
 private:
   const uint16_t* GetMelody( MelodyID id );
@@ -28,7 +28,7 @@ private:
   uint64_t playNext = 0;
 
   const uint8_t pinSpeaker = 8;
-  const uint8_t BeepTimeout = 10000;
+  const uint8_t BeepTimeout = 50;
 };
 
 #endif // SOUND_H

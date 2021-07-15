@@ -7,30 +7,38 @@ Game::Game()
 
 void Game::MoveRight()
 {
-  Point p = FindPlayer();
-  if ( p.x < width - 1 )
-    Swap( *GetCellPtr( p.x, p.y ), *GetCellPtr( p.x + 1, p.y ) );
+  if ( pointX < width - 1 )
+  {
+    Swap( *GetCellPtr( pointX, pointY ), *GetCellPtr( pointX + 1, pointY ) );
+    ++pointX;
+  }
 }
 
 void Game::MoveLeft()
 {
-  Point p = FindPlayer();
-  if ( p.x > 0 )
-    Swap( *GetCellPtr( p.x, p.y ), *GetCellPtr( p.x - 1, p.y ) );
+  if ( pointX > 0 )
+  {
+    Swap( *GetCellPtr( pointX, pointY ), *GetCellPtr( pointX - 1, pointY ) );
+    --pointX;
+  }
 }
 
 void Game::MoveUp()
 {
-  Point p = FindPlayer();
-  if ( p.y > 0 )
-    Swap( *GetCellPtr( p.x, p.y ), *GetCellPtr( p.x, p.y - 1 ) );
+  if ( pointY > 0 )
+  {
+    Swap( *GetCellPtr( pointX, pointY ), *GetCellPtr( pointX, pointY - 1 ) );
+    --pointY;
+  }
 }
 
 void Game::MoveDown()
 {
-  Point p = FindPlayer();
-  if ( p.y < width - 1 )
-    Swap( *GetCellPtr( p.x, p.y ), *GetCellPtr( p.x, p.y + 1 ) );
+  if ( pointY < width - 1 )
+  {
+    Swap( *GetCellPtr( pointX, pointY ), *GetCellPtr( pointX, pointY + 1 ) );
+    ++pointY;
+  }
 }
 
 bool Game::IsWin() const
@@ -39,14 +47,6 @@ bool Game::IsWin() const
     if ( map[i] > map[i + 1] )
       return false;
   return true;
-}
-
-Point Game::FindPlayer() const
-{
-  constexpr int player = width * width;
-  for ( int i = 0; i < player; i++ )
-    if ( map[i] == player )
-      return Point( i % width, i / width );
 }
 
 void Game::Swap( int8_t& p1, int8_t& p2 )
@@ -71,4 +71,5 @@ void Game::MixMap()
     else if ( com == 3 )
       MoveDown();
   }
+  stepCount = 0;
 }
