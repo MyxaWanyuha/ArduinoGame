@@ -4,7 +4,7 @@ void SoundManager::PlayMelody( MelodyID id, bool cycle )
 {
   if ( id == MelodyID::None ) return;
 
-  uint64_t time = millis();
+  const auto time = millis();
 
   if ( melodyPlaying != id )
   {

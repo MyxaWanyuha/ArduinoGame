@@ -15,8 +15,9 @@ void Snake::Reset()
 
 bool Snake::MoveSnakeAndCheckIntersection()
 {
-  Point head = Point( snake[0].x + static_cast<int8_t>( xDir ),
-                      snake[0].y + static_cast<int8_t>( yDir ) );
+  const Point head = Point(
+    snake[0].x + static_cast<int8_t>( xDir ),
+    snake[0].y + static_cast<int8_t>( yDir ) );
 
   //move tail
   for ( auto i = snakeSize; i != 0; --i )
@@ -36,7 +37,7 @@ bool Snake::MoveSnakeAndCheckIntersection()
     || snake[0].y == UpBorder + 1 )
     return true;
 
-  int8_t food = GetEatenFoodIndex();
+  const int8_t food = GetEatenFoodIndex();
   if( food >= 0 )
   {
     ReplaceFood( food );
@@ -55,8 +56,8 @@ bool Snake::MoveSnakeAndCheckIntersection()
 
 void Snake::ReplaceFood(uint8_t i)
 {
-  food[i].x = random(LeftBorder + 1, RightBorder - 1);
-  food[i].y = random(UpBorder + 1, DownBorder - 1);
+  food[i].x = random( LeftBorder + 1, RightBorder - 1 );
+  food[i].y = random( UpBorder + 1, DownBorder - 1 );
 }
 
 int8_t Snake::GetEatenFoodIndex() const
@@ -69,28 +70,28 @@ int8_t Snake::GetEatenFoodIndex() const
 
 void Snake::MoveUp()
 {
-  if (yDir == Direction::Down) return;
+  if ( yDir == Direction::Down ) return;
   xDir = Direction::None;
   yDir = Direction::Up;
 }
 
 void Snake::MoveDown()
 {
-  if (yDir == Direction::Up) return;
+  if ( yDir == Direction::Up ) return;
   xDir = Direction::None;
   yDir = Direction::Down;
 }
 
 void Snake::MoveRight()
 {
-  if (xDir == Direction::Left) return;
+  if ( xDir == Direction::Left ) return;
   xDir = Direction::Right;
   yDir = Direction::None;
 }
 
 void Snake::MoveLeft()
 {
-  if (xDir == Direction::Right) return;
+  if ( xDir == Direction::Right ) return;
   xDir = Direction::Left;
   yDir = Direction::None;
 }

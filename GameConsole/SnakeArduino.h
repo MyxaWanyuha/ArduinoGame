@@ -26,10 +26,10 @@ class SnakeArduino : public GamePrototype, protected Snake
   void DrawSnake()
   {
   const auto snakeSize = GetSnakeSize();
-    for( uint8_t z = 0; z < snakeSize; ++z )
+    for( uint8_t i = 0; i < snakeSize; ++i )
     {
-      const Point snakeSegment = GetSnakeSegmentCoordinates(z);
-      for( uint8_t i = 0; i < snakeSize; ++i )
+      const Point snakeSegment = GetSnakeSegmentCoordinates( i );
+      for( uint8_t j = 0; j < snakeSize; ++j )
        Graphics.drawPixel( snakeSegment.x, snakeSegment.y );
     }
   }
@@ -38,7 +38,7 @@ class SnakeArduino : public GamePrototype, protected Snake
   {
     for( uint8_t i = 0; i < foodCount; ++i )
     {
-      const Point foodCoord = GetFoodCoordinates(i);
+      const Point foodCoord = GetFoodCoordinates( i );
       Graphics.drawPixel( foodCoord.x, foodCoord.y );
     }
   }
@@ -53,7 +53,7 @@ class SnakeArduino : public GamePrototype, protected Snake
 
       Graphics.setFont( u8g2_font_ncenB08_tr );
       const char* text = "Points: ";
-      TextHeightWidth textHW(text);
+      const TextHeightWidth textHW(text);
       Graphics.drawStr( 0, textHW.height, text );
       char buf[5];
       constexpr int8_t notation = 10;
@@ -70,7 +70,7 @@ class SnakeArduino : public GamePrototype, protected Snake
       Graphics.drawStr( 8, 24, "GameOver" );
 
       const char* text = "Points: ";
-      TextHeightWidth textHW(text);
+      const TextHeightWidth textHW(text);
       Graphics.drawStr( 10, textHW.height + 30, text );
       char buf[5];
       constexpr int8_t notation = 10;

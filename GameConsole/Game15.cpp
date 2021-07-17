@@ -52,16 +52,14 @@ bool Game::IsWin() const
 void Game::Swap( int8_t& p1, int8_t& p2 )
 {
   ++stepCount;
-  p1 = p1 ^ p2;
-  p2 = p1 ^ p2;
-  p1 = p1 ^ p2;
+  p1 ^= p2 ^= p1 ^= p2;
 }
 
 void Game::MixMap()
 {
   for ( int n = 0; n < 500; n++ )
   {
-    int com = random( 4 );
+    const int com = random( 4 );
     if ( com == 0 )
       MoveRight();
     else if ( com == 1 )

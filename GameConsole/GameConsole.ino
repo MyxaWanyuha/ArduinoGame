@@ -2,15 +2,18 @@
 #include "Game15Arduino.h"
 #include "SnakeArduino.h"
 
-Game15Arduino g;
-SnakeArduino game;
+//Game15Arduino g;
+//SnakeArduino game;
+
+GamePrototype* game = nullptr;
 
 void setup()
 {
-  Graphics.begin(); 
+  Graphics.begin();
+  game = new SnakeArduino();
 }
 
 void loop()
 {
-  g.UpdateGame();
+  game->UpdateGame();
 }
