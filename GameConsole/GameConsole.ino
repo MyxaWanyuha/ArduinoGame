@@ -2,6 +2,7 @@
 #include "Game15Arduino.h"
 #include "SnakeArduino.h"
 
+Game15Arduino g;
 SnakeArduino game;
 
 void setup()
@@ -11,5 +12,5 @@ void setup()
 
 void loop()
 {
-  game.UpdateGame();
+  g.UpdateGame();
 }

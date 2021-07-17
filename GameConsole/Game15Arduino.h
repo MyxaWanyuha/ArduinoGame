@@ -39,17 +39,7 @@ class Game15Arduino : protected Game, public GamePrototype
     }
     else if( Mode == GameMode::Ready )
     {
-      Graphics.setFont( u8g2_font_ncenB10_tr );
-      Graphics.drawStr( 6, 24, "MyxaWanyuha" );
-      Graphics.drawStr( 20, 40, "15" );
-
-      Graphics.setFont( u8g2_font_ncenB08_tr );
-      const char* text = "Press any key";
-      TextHeightWidth textHW(text);
-      if( intro_state )
-        Graphics.drawStr( 10, 55, text );
-      else
-        Graphics.drawBox( 10, 55 - textHW.height, textHW.width, textHW.height ); // remove text
+      DefaultGameReadyRender("15");
     }
     else if( Mode == GameMode::End || Mode == GameMode::Reset )
     {

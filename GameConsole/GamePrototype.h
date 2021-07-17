@@ -45,7 +45,7 @@ public:
     if( Mode == GameMode::Ready && time > IntroNext )
     {
       IntroNext = time + IntroTimeout;
-      intro_state = !intro_state;
+      isIntro = !isIntro;
     }
 
     //UpdateControls
@@ -84,6 +84,22 @@ public:
   }
 
 protected:
+
+  void DefaultGameReadyRender(const char* GameName)
+  {
+    Graphics.setFont( u8g2_font_ncenB10_tr );
+    Graphics.drawStr( 6, 24, "MyxaWanyuha" );
+    Graphics.drawStr( 20, 40, GameName );
+    Graphics.setFont( u8g2_font_ncenB08_tr );
+    const char* text = "Press any key";
+    
+    TextHeightWidth textHW(text);
+    if( isIntro )
+      Graphics.drawStr( 10, 55, text );
+    else
+      Graphics.drawBox( 10, 55 - textHW.height, textHW.width, textHW.height ); // remove text
+  }
+
   GameMode Mode = GameMode::Ready;
 
   virtual void Render() = 0;
@@ -97,7 +113,7 @@ protected:
   bool ButtonRightUp = false;
   bool ButtonLeftUp = false;
   
-  bool intro_state = true;
+  bool isIntro = true;
   
 private:
   virtual void PlaySound()

@@ -41,6 +41,7 @@ bool Snake::MoveSnakeAndCheckIntersection()
   {
     ReplaceFood( food );
     ++snakeSize;
+    ++points;
   /*// speed up snake
   //update_timeout = 300 - 20*(snake_size>>2);
   if( update_timeout >= SNAKE_SPEEDUP )
@@ -58,16 +59,11 @@ void Snake::ReplaceFood(uint8_t i)
   food[i].y = random(UpBorder + 1, DownBorder - 1);
 }
 
-int8_t Snake::GetEatenFoodIndex()
+int8_t Snake::GetEatenFoodIndex() const
 {
   for( uint8_t i = 0; i < foodCount; ++i )
-  {
     if( snake[0].x == food[i].x && snake[0].y == food[i].y )
-    {
-      ++points;
       return i;
-    }
-  }
   return -1;
 }
 
