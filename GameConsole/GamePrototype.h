@@ -97,8 +97,6 @@ protected:
   bool ButtonRightUp = false;
   bool ButtonLeftUp = false;
   
-  SoundManager soundManager;
-  
   bool intro_state = true;
   
 private:
@@ -128,9 +126,9 @@ private:
   uint64_t PlayNext = 0;
   uint64_t IntroNext = 0;
 
-  const uint16_t UpdateTimeout = 16;
+  const uint16_t UpdateTimeout = 100;
   const uint16_t ResetTimeout = 2000;
-  const uint8_t ControlTimeout = 100;
+  const uint8_t ControlTimeout = 10;
   const uint8_t BeepTimeout = 100;
   const uint16_t IntroTimeout = 500;
 };

@@ -61,10 +61,10 @@ class Game15Arduino : protected Game, public GamePrototype
   virtual void Update() override
   { 
     if( ButtonUp )
-      {
-        MoveUp();
-        soundManager.Beep();
-      }
+    {
+      MoveUp();
+      soundManager.Beep();
+    }
     else if ( ButtonDown )
     {
       MoveDown();

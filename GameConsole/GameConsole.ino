@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include "Game15Arduino.h"
+#include "SnakeArduino.h"
 
-Game15Arduino game;
+SnakeArduino game;
 
 void setup()
 {

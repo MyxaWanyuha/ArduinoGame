@@ -31,4 +31,6 @@ private:
   const uint8_t BeepTimeout = 50;
 };
 
+static SoundManager soundManager;
+
 #endif // SOUND_H
