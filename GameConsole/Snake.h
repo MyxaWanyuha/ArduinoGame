@@ -31,7 +31,7 @@ public:
   Point GetSnakeSegmentCoordinates(uint8_t i) const { return snake[i]; }
   Point GetFoodCoordinates(uint8_t i) const { return food[i]; }
   uint16_t GetPoints() const { return points; }
-  
+  uint16_t GetSnakeSpeed() const { return snakeSpeed; }
   static const uint8_t height = 64;
   static const uint8_t width = 128;
   static const uint8_t snakeMaxLength = width;
@@ -61,6 +61,9 @@ private:
   
   Direction xDir = Direction::Right;
   Direction yDir = Direction::None;
+
+  const uint16_t defaultSnakeSpeed = 100;
+  uint16_t snakeSpeed = defaultSnakeSpeed;
 };
 
 #endif // SNAKE_H

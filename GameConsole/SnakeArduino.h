@@ -94,7 +94,10 @@ class SnakeArduino : public GamePrototype, protected Snake
       Mode = GameMode::End;
 
     if( IsFoodEaten() )
+    {
+      UpdateTimeout = GetSnakeSpeed();
       soundManager.Beep();
+    }
   }
 
   virtual void ResetGame() override

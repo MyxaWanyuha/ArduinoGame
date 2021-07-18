@@ -11,6 +11,8 @@ void Snake::Reset()
   snake[0] = Point( width / 2, height / 2);
   for( uint8_t i = 0; i < foodCount; ++i )
    ReplaceFood(i);
+  snakeSpeed = defaultSnakeSpeed;
+  points = 0;
 }
 
 bool Snake::MoveSnakeAndCheckIntersection()
@@ -47,12 +49,13 @@ bool Snake::IsFoodEaten()
     ReplaceFood( food );
     ++snakeSize;
     ++points;
-  /*// speed up snake
-  //update_timeout = 300 - 20*(snake_size>>2);
-  if( update_timeout >= SNAKE_SPEEDUP )
-    update_timeout -= SNAKE_SPEEDUP;
-  else
-    update_timeout = 0;*/
+   
+    // speed up snake
+    snakeSpeed = 100 - 20 * ( snakeSize >> 2 );
+    if( snakeSpeed >= 3 )
+      snakeSpeed -= 3;
+    else
+      snakeSpeed = 0;
     return true;
   }
   return false;

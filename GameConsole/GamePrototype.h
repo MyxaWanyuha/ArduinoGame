@@ -115,12 +115,13 @@ protected:
   
   bool isIntro = true;
   
+  uint16_t UpdateTimeout = 100;
 private:
   virtual void PlaySound()
   {
     if( Mode == GameMode::Ready )
       soundManager.PlayMelody( MelodyID::Intro, true );
-    else if( Mode == GameMode::End )
+    else if( Mode == GameMode::End || Mode == GameMode::Reset )
       soundManager.PlayMelody( MelodyID::GameOver );
     else if( Mode == GameMode::Game )
       soundManager.PlayMelody( MelodyID::GameStart );
@@ -141,8 +142,7 @@ private:
   uint64_t ResetNext = 0;
   uint64_t PlayNext = 0;
   uint64_t IntroNext = 0;
-
-  const uint16_t UpdateTimeout = 100;
+  
   const uint16_t ResetTimeout = 2000;
   const uint8_t ControlTimeout = 10;
   const uint8_t BeepTimeout = 100;
