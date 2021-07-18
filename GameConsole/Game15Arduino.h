@@ -29,7 +29,7 @@ class Game15Arduino : protected Game, public GamePrototype
         Graphics.setFont( u8g2_font_ncenB10_tr );
         char buf[5];
         itoa( stepCount, buf, notation );
-        TextHeightWidth textHW( buf );
+        const TextHeightWidth textHW( buf );
 
         const char* steps = "steps: ";
         const TextHeightWidth stepsHW( steps );

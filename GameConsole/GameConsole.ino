@@ -1,19 +1,21 @@
 #include <Arduino.h>
-#include "Game15Arduino.h"
-#include "SnakeArduino.h"
+#include "Menu.h"
 
-//Game15Arduino g;
-//SnakeArduino game;
-
-GamePrototype* game = nullptr;
-
+Menu m;
+Game15Arduino j;
 void setup()
 {
-  Graphics.begin();
-  game = new SnakeArduino();
+  Graphics.begin(); 
 }
+
+uint64_t UpdateNext = 0;
 
 void loop()
 {
-  game->UpdateGame();
+  Graphics.firstPage();
+  do
+  {
+     m.MainUpdate();
+  } 
+  while( Graphics.nextPage() );
 }
