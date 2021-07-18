@@ -92,6 +92,9 @@ class SnakeArduino : public GamePrototype, protected Snake
     
     if( MoveSnakeAndCheckIntersection() )
       Mode = GameMode::End;
+
+    if( IsFoodEaten() )
+      soundManager.Beep();
   }
 
   virtual void ResetGame() override

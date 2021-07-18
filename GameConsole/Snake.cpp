@@ -36,7 +36,11 @@ bool Snake::MoveSnakeAndCheckIntersection()
     || snake[0].y == DownBorder - 1 
     || snake[0].y == UpBorder + 1 )
     return true;
+  return false;
+}
 
+bool Snake::IsFoodEaten()
+{
   const int8_t food = GetEatenFoodIndex();
   if( food >= 0 )
   {
@@ -49,8 +53,8 @@ bool Snake::MoveSnakeAndCheckIntersection()
     update_timeout -= SNAKE_SPEEDUP;
   else
     update_timeout = 0;*/
+    return true;
   }
-  
   return false;
 }
 

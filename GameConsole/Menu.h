@@ -59,17 +59,24 @@ protected:
   void MoveUp()
   {
     if( currentItem > 0 )
+    {
       --currentItem;
+      soundManager.Beep();
+    }
   }
   
   void MoveDown()
   {
     if( currentItem < ( itemsCount - 1 ) )
+    {
+      soundManager.Beep();
       ++currentItem;
+    }
   }
 
   void Select()
   {
+    soundManager.Beep();
     delete( gameptr );
     if ( currentItem == 0 )
       gameptr = new Game15Arduino();

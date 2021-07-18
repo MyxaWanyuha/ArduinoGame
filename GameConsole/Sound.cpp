@@ -34,9 +34,15 @@ void SoundManager::PlayMelody( MelodyID id, bool cycle )
   }
 }
 
+static uint64_t SoundManager::beepUpdate = 0;
 void SoundManager::Beep()
 {
-  tone( pinSpeaker, 147, BeepTimeout );
+  const auto time = millis();
+  if ( beepUpdate < time )
+  {
+    beepUpdate = time + BeepTimeout;
+    tone( pinSpeaker, 147, BeepTimeout / 2 );
+  }
 }
 
 const uint16_t* SoundManager::GetMelody( MelodyID id )

@@ -16,7 +16,7 @@ public:
   Snake();
   void Reset();
   bool MoveSnakeAndCheckIntersection();
-
+  bool IsFoodEaten();
   void ReplaceFood(uint8_t i);
 
   // return -1 if not eaten

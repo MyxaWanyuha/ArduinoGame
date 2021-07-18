@@ -50,26 +50,15 @@ class Game15Arduino : protected Game, public GamePrototype
 
   virtual void Update() override
   { 
-    if( ButtonUp )
-    {
-      MoveUp();
+    if( ButtonUp && MoveUp() )
       soundManager.Beep();
-    }
-    else if ( ButtonDown )
-    {
-      MoveDown();
+    else if ( ButtonDown && MoveDown() )
       soundManager.Beep();
-    }
-    else if ( ButtonLeft )
-    {
-      MoveLeft();
+    else if ( ButtonLeft && MoveLeft() )
       soundManager.Beep();
-    }
-    else if ( ButtonRight )
-    {
-      MoveRight();
+    else if ( ButtonRight && MoveRight() )
       soundManager.Beep();
-    }
+
     if( IsWin() )
       Mode = GameMode::End;
 	}

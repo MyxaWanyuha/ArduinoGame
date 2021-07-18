@@ -28,7 +28,8 @@ private:
   uint64_t playNext = 0;
 
   const uint8_t pinSpeaker = 8;
-  const uint8_t BeepTimeout = 50;
+  const uint8_t BeepTimeout = 100;
+  static uint64_t beepUpdate;
 };
 
 static SoundManager soundManager;

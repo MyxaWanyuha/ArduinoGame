@@ -5,40 +5,48 @@ Game::Game()
   MixMap();
 }
 
-void Game::MoveRight()
+bool Game::MoveRight()
 {
   if ( pointX < width - 1 )
   {
     Swap( *GetCellPtr( pointX, pointY ), *GetCellPtr( pointX + 1, pointY ) );
     ++pointX;
+    return true;
   }
+  return false;
 }
 
-void Game::MoveLeft()
+bool Game::MoveLeft()
 {
   if ( pointX > 0 )
   {
     Swap( *GetCellPtr( pointX, pointY ), *GetCellPtr( pointX - 1, pointY ) );
     --pointX;
+    return true;
   }
+  return false;
 }
 
-void Game::MoveUp()
+bool Game::MoveUp()
 {
   if ( pointY > 0 )
   {
     Swap( *GetCellPtr( pointX, pointY ), *GetCellPtr( pointX, pointY - 1 ) );
     --pointY;
+    return true;
   }
+  return false;
 }
 
-void Game::MoveDown()
+bool Game::MoveDown()
 {
   if ( pointY < width - 1 )
   {
     Swap( *GetCellPtr( pointX, pointY ), *GetCellPtr( pointX, pointY + 1 ) );
     ++pointY;
+    return true;
   }
+  return false;
 }
 
 bool Game::IsWin() const

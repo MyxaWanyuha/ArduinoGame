@@ -11,10 +11,10 @@ public:
   uint16_t GetStepCount() const { return stepCount; }
 protected:
   void MixMap();
-  void MoveRight();
-  void MoveLeft();
-  void MoveUp();
-  void MoveDown();
+  bool MoveRight();
+  bool MoveLeft();
+  bool MoveUp();
+  bool MoveDown();
   bool IsWin() const;
 
 private:
