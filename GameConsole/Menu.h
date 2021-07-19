@@ -2,8 +2,7 @@
 #define MENU_H
 #include <Arduino.h>
 #include "GamePrototype.h"
-#include "Game15Arduino.h"
-#include "SnakeArduino.h"
+#include "MenuGames.h"
 
 class Menu
 {
@@ -23,15 +22,23 @@ protected:
   void Render()
   {
     if (gameptr != nullptr) return;
-    
-    Graphics.setFont( u8g2_font_ncenB10_tr );
-    const TextHeightWidth stepsHW( names[0] );
-    for( uint8_t i = 0; i < itemsCount; ++i )
+
+    Graphics.firstPage();
+    do
     {
-      Graphics.drawStr( 10, stepsHW.height * ( i + 1 ), names[i] );
-    }
-    const char* finger = "> ";
-    Graphics.drawStr( 0, stepsHW.height * ( currentItem + 1 ), finger );
+      Graphics.setFont( u8g2_font_ncenB10_tr ); // 4 lines on screen
+      const uint8_t maxLinesCountOnScreen = 4;
+      const TextHeightWidth nameHW( menuGames[0].gameName );
+      for( uint8_t i = currentItem; i < gamesCount && i < ( maxLinesCountOnScreen + currentItem ) ; ++i )
+      {
+        Graphics.drawStr( 10, 
+        nameHW.height * ( ( ( i - currentItem ) % maxLinesCountOnScreen ) + 1 ),
+        menuGames[i].gameName );
+      }
+      const char* finger = "> ";
+      Graphics.drawStr( 0, nameHW.height, finger );
+    } 
+    while( Graphics.nextPage() );
   }
   
   void Update()
@@ -60,17 +67,19 @@ protected:
   {
     if( currentItem > 0 )
     {
-      --currentItem;
       soundManager.Beep();
+      --currentItem;
+      delay(150);
     }
   }
   
   void MoveDown()
   {
-    if( currentItem < ( itemsCount - 1 ) )
+    if( currentItem < ( gamesCount - 1 ) )
     {
       soundManager.Beep();
       ++currentItem;
+      delay(150);
     }
   }
 
@@ -78,21 +87,15 @@ protected:
   {
     soundManager.Beep();
     delete( gameptr );
-    if ( currentItem == 0 )
-      gameptr = new Game15Arduino();
-    else if ( currentItem == 1 )
-      gameptr = new SnakeArduino();
+    gameptr = menuGames[currentItem].GetNewGame();
   }
 
 private:
-  static constexpr char* names[] = 
-  {
-    "1. 15",
-    "2. Snake"
-  };
-  static constexpr uint8_t itemsCount = sizeof(names)/ sizeof(names[0]);
   uint8_t currentItem = 0;
   GamePrototype* gameptr = nullptr;
+  static const uint8_t gamesCount;
 };
+
+static const uint8_t Menu::gamesCount = sizeof(menuGames) / sizeof(menuGames[0]);
 
 #endif // MENU_H
