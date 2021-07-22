@@ -45,14 +45,14 @@ protected:
   {
     if ( gameptr == nullptr )
     {
-      if ( digitalRead( static_cast<uint8_t>( PinButton::Up ) ) )
+      if ( digitalRead( ButtonUp ) )
         MoveUp();
-      else if ( digitalRead( static_cast<uint8_t>( PinButton::Down ) ) )
+      else if ( digitalRead( ButtonDown ) )
         MoveDown();
-      else if ( digitalRead( static_cast<uint8_t>( PinButton::Right ) ) )
+      else if ( digitalRead( ButtonRight ) )
         Select();
     }
-    else if ( digitalRead( static_cast<uint8_t>( PinButton::RightUp ) ) == false )
+    else if ( digitalRead( ButtonRightUp ) == false )
     {
       gameptr->UpdateGame();
     }
@@ -94,6 +94,11 @@ private:
   uint8_t currentItem = 0;
   GamePrototype* gameptr = nullptr;
   static const uint8_t gamesCount;
+
+  const uint8_t ButtonUp = static_cast<uint8_t>( PinButton::Up );
+  const uint8_t ButtonDown = static_cast<uint8_t>( PinButton::Down );
+  const uint8_t ButtonRight = static_cast<uint8_t>( PinButton::Right );
+  const uint8_t ButtonRightUp = static_cast<uint8_t>( PinButton::RightUp );
 };
 
 static const uint8_t Menu::gamesCount = sizeof(menuGames) / sizeof(menuGames[0]);

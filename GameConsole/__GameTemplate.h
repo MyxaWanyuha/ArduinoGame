@@ -37,7 +37,8 @@ class GameNameArduino : public GamePrototype, protected GameName
       ;
     else if ( ButtonLeftUp )
       ;
-    
+    else if ( ButtonRightUp )
+      ;
     if( /*GameOver()*/ )
       Mode = GameMode::End;
   }

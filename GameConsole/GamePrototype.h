@@ -4,14 +4,6 @@
 #include "Sound.h"
 #include "Graphics.h"
 
-enum class GameMode : uint8_t
-{
-  Game = 0,
-  End,
-  Reset,
-  Ready
-};
-
 enum class PinButton : uint8_t
 {
   Up = A0,
@@ -29,7 +21,7 @@ public:
   {
     PlaySound();
 
-    uint64_t time = millis();
+    const uint64_t time = millis();
 
     if( Mode == GameMode::End )
     {
@@ -84,12 +76,20 @@ public:
   }
 
 protected:
-
-  void DefaultGameReadyRender(const char* GameName)
+  enum class GameMode : uint8_t
   {
+    Game = 0,
+    End,
+    Reset,
+    Ready
+  };
+
+  void DefaultGameReadyRender(const char* gameName, const char* creator = "github MyxaWanyuha")
+  {
+    Graphics.setFont( u8g2_font_ncenB08_tr );
+    Graphics.drawStr( 0, 24, creator );
     Graphics.setFont( u8g2_font_ncenB10_tr );
-    Graphics.drawStr( 6, 24, "MyxaWanyuha" );
-    Graphics.drawStr( 20, 40, GameName );
+    Graphics.drawStr( 20, 40, gameName );
     Graphics.setFont( u8g2_font_ncenB08_tr );
     const char* text = "Press any key";
     
