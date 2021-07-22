@@ -9,15 +9,15 @@ class GameNameArduino : public GamePrototype, protected GameName
   // draw with Graphics
   virtual void Render() override
   {
-    if( Mode == GameMode::Game )
+    if( mode == GameMode::Game )
     {
       
     }
-    else if( Mode == GameMode::Ready )
+    else if( mode == GameMode::Ready )
     {
       DefaultGameReadyRender("GameName");
     }
-    else if( Mode == GameMode::End || Mode == GameMode::Reset )
+    else if( mode == GameMode::End || mode == GameMode::Reset )
     {
       Graphics.setFont( u8g2_font_ncenB10_tr );
       Graphics.drawStr( 8, 24, "GameOver" );
@@ -27,20 +27,20 @@ class GameNameArduino : public GamePrototype, protected GameName
   // control game mode and check controls
   virtual void Update() override
   { 
-    if( ButtonUp )
+    if( buttonUp )
       ;
-    else if ( ButtonDown )
+    else if ( buttonDown )
       ;
-    else if ( ButtonLeft )
+    else if ( buttonLeft )
       ;
-    else if ( ButtonRight )
+    else if ( buttonRight )
       ;
-    else if ( ButtonLeftUp )
+    else if ( buttonLeftUp )
       ;
-    else if ( ButtonRightUp )
+    else if ( buttonRightUp )
       ;
     if( /*GameOver()*/ )
-      Mode = GameMode::End;
+      mode = GameMode::End;
   }
 
   // reset your game parameters

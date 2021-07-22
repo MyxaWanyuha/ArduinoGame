@@ -8,7 +8,7 @@ class Game15Arduino : protected Game, public GamePrototype
 {
   virtual void Render() override
   {
-    if( Mode == GameMode::Game )
+    if( mode == GameMode::Game )
     {
       constexpr int8_t notation = 10;
       Graphics.setFont( u8g2_font_ncenB14_tr );
@@ -37,11 +37,11 @@ class Game15Arduino : protected Game, public GamePrototype
         Graphics.drawStr( ScreenWidth - textHW.width, textHW.height, buf );
       }
     }
-    else if( Mode == GameMode::Ready )
+    else if( mode == GameMode::Ready )
     {
       DefaultGameReadyRender("15");
     }
-    else if( Mode == GameMode::End || Mode == GameMode::Reset )
+    else if( mode == GameMode::End || mode == GameMode::Reset )
     {
       Graphics.setFont( u8g2_font_ncenB10_tr );
       Graphics.drawStr( 8, 24, "You win!" );
@@ -50,17 +50,17 @@ class Game15Arduino : protected Game, public GamePrototype
 
   virtual void Update() override
   { 
-    if( ButtonUp && MoveUp() )
+    if( buttonUp && MoveUp() )
       soundManager.Beep();
-    else if ( ButtonDown && MoveDown() )
+    else if ( buttonDown && MoveDown() )
       soundManager.Beep();
-    else if ( ButtonLeft && MoveLeft() )
+    else if ( buttonLeft && MoveLeft() )
       soundManager.Beep();
-    else if ( ButtonRight && MoveRight() )
+    else if ( buttonRight && MoveRight() )
       soundManager.Beep();
 
     if( IsWin() )
-      Mode = GameMode::End;
+      mode = GameMode::End;
 	}
 
   virtual void ResetGame() override

@@ -45,7 +45,7 @@ class SnakeArduino : public GamePrototype, protected Snake
   
   virtual void Render() override
   {
-    if( Mode == GameMode::Game )
+    if( mode == GameMode::Game )
     {
       DrawBorder();
       DrawSnake();
@@ -60,11 +60,11 @@ class SnakeArduino : public GamePrototype, protected Snake
       itoa( GetPoints(), buf, notation );
       Graphics.drawStr( textHW.width, textHW.height, buf );
     }
-    else if( Mode == GameMode::Ready )
+    else if( mode == GameMode::Ready )
     {
       DefaultGameReadyRender("Snake");
     }
-    else if( Mode == GameMode::End || Mode == GameMode::Reset )
+    else if( mode == GameMode::End || mode == GameMode::Reset )
     {
       Graphics.setFont( u8g2_font_ncenB10_tr );
       Graphics.drawStr( 8, 24, "GameOver" );
@@ -81,21 +81,21 @@ class SnakeArduino : public GamePrototype, protected Snake
 
   virtual void Update() override
   { 
-    if( ButtonUp )
+    if( buttonUp )
       MoveUp();
-    else if ( ButtonDown )
+    else if ( buttonDown )
       MoveDown();
-    else if ( ButtonLeft )
+    else if ( buttonLeft )
       MoveLeft();
-    else if ( ButtonRight )
+    else if ( buttonRight )
       MoveRight();
     
     if( MoveSnakeAndCheckIntersection() )
-      Mode = GameMode::End;
+      mode = GameMode::End;
 
     if( IsFoodEaten() )
     {
-      UpdateTimeout = GetSnakeSpeed();
+      updateTimeout = GetSnakeSpeed();
       soundManager.Beep();
     }
   }
