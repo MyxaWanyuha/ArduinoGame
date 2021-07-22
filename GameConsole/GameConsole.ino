@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "Menu.h"
 
-Menu m;
+Menu menu;
 
 void setup()
 {
@@ -10,5 +10,5 @@ void setup()
 
 void loop()
 {
-  m.MainUpdate();
+  menu.MainUpdate();
 }
