@@ -103,6 +103,7 @@ class SnakeArduino : public GamePrototype, protected Snake
   virtual void ResetGame() override
   {
     Reset();
+    updateTimeout = defaultUpdateTimeout;
   }
 };
 

@@ -114,8 +114,8 @@ protected:
   bool buttonLeftUp = false;
   
   bool isIntro = true;
-  
-  uint16_t updateTimeout = 100;
+  const uint16_t defaultUpdateTimeout = 100;
+  uint16_t updateTimeout = defaultUpdateTimeout;
 private:
   virtual void PlaySound()
   {
