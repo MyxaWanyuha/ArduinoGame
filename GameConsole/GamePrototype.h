@@ -17,6 +17,8 @@ enum class PinButton : uint8_t
 class GamePrototype
 {
 public:
+  virtual ~GamePrototype(){}
+  
   void UpdateGame()
   {
     PlaySound();
